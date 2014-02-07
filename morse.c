@@ -27,17 +27,17 @@ void dot() {
 int main(int argc, char ** argv) {
     char * string = argv[1];
     char * morse_string;
-    char current_char;
+    int current_char;
 
     wiringPiSetup () ;
     pinMode (OUTPUT_PIN, OUTPUT) ;
 
     puts(string);
     while(*string) {
-        current_char = (*string | 32);
+        current_char = (*string | 32) - 'a';
 
-        if (current_char - 'a' >= 0 && current_char - 'a' < 26) {
-            morse_string = conversion_map[current_char - 'a'];
+        if (current_char >= 0 && current_char < 26) {
+            morse_string = conversion_map[current_char];
             while(*morse_string) {
                 if (*morse_string == '.') {
                     dot();
